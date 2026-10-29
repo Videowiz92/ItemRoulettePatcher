@@ -19,6 +19,10 @@ New-Item -ItemType Directory -Force $stage | Out-Null
 
 $bin = Join-Path $root 'src/ItemRoulettePatcher/bin/Release/netstandard2.1'
 Copy-Item (Join-Path $bin 'ItemRoulettePatcher.dll') $stage
+foreach ($f in 'artifact_on.png', 'artifact_off.png') {
+    $icon = Join-Path $root "assets/$f"
+    if (Test-Path $icon) { Copy-Item $icon $stage }
+}
 foreach ($f in 'manifest.json', 'README.md', 'CHANGELOG.md', 'icon.png') {
     Copy-Item (Join-Path $root "thunderstore/$f") $stage
 }

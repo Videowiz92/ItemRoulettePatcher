@@ -32,6 +32,7 @@
     <Reference Include="Unity.ResourceManager"><HintPath>$(RoR2ManagedDir)\Unity.ResourceManager.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine"><HintPath>$(RoR2ManagedDir)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="UnityEngine.CoreModule"><HintPath>$(RoR2ManagedDir)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.ImageConversionModule"><HintPath>$(RoR2ManagedDir)\UnityEngine.ImageConversionModule.dll</HintPath><Private>false</Private></Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime"><HintPath>$(RoR2ManagedDir)\com.unity.multiplayer-hlapi.Runtime.dll</HintPath><Private>false</Private></Reference>
 
     <Reference Include="R2API.ContentManagement"><HintPath>$(PluginsDir)\RiskofThunder-R2API_ContentManagement\R2API.ContentManagement\R2API.ContentManagement.dll</HintPath><Private>false</Private></Reference>

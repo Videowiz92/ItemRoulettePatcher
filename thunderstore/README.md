@@ -29,6 +29,12 @@ Config file: `BepInEx/config/com.itemroulettepatcher.fixes.cfg`. All options are
 Everyone in the lobby needs this mod (it adds an artifact). The equipment, Duplicator and Life Bet fixes run on the host.
 Translation runs on each player's own client.
 
+## Icons / AI note
+The mod's icons (the in-game artifact icon and this page's icon) were made with AI as placeholders. You can use your own artifact icon without
+rebuilding: put `artifact_on.png` and `artifact_off.png` next to `ItemRoulettePatcher.dll` (square, e.g. 128x128 or 256x256). See the GitHub README for details.
+
+*Иконки мода (артефакт в игре и иконка страницы) созданы с помощью ИИ и служат заглушками. Свои иконки артефакта можно добавить без пересборки: положите `artifact_on.png` и `artifact_off.png` рядом с `ItemRoulettePatcher.dll`.*
+
 ## Reporting leftovers
 If Russian text still shows up while ItemRoulette is set to English, the game log gets a line starting with
 `Untranslated Russian text` - please include it in a bug report.
