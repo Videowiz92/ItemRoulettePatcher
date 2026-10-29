@@ -8,6 +8,7 @@ namespace ItemRoulettePatcher
         public static ConfigEntry<bool> PreserveQualityEquipment;
         public static ConfigEntry<bool> DuplicatorOnRouletteItems;
         public static ConfigEntry<bool> LifeBetRespectsExtraLives;
+        public static ConfigEntry<bool> PauseWhileOpen;
         public static ConfigEntry<bool> TranslateRussianFallbackText;
         public static ConfigEntry<bool> LogUntranslatedRussian;
 
@@ -30,6 +31,11 @@ namespace ItemRoulettePatcher
                 "When false (ItemRoulette's original behaviour) losing a Life Bet is a hard kill: Dio's Best Friend, Pluripotent Larva " +
                 "and Seed of Life are consumed and cannot save you. When true, a lost Life Bet is an ordinary lethal hit and your " +
                 "extra lives / Seed of Life revive you as usual.");
+
+            PauseWhileOpen = config.Bind("Fixes", "PauseWhileOpen", true,
+                "Makes ItemRoulette's own 'PauseGameWhileOpen' option work. In 1.4.4 that option is shown in the settings but never read, " +
+                "so it does nothing. When true (and that option is on), single-player is paused while the roulette reel, casino or admin " +
+                "menu is open. Multiplayer is never paused. Set to false to leave the option inert as in ItemRoulette 1.4.4.");
 
             TranslateRussianFallbackText = config.Bind("Localization", "TranslateRussianFallbackText", true,
                 "ItemRoulette 1.4.4 contains some Russian-only messages that appear even when its Language setting resolves to English " +

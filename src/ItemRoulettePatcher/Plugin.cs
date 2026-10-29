@@ -58,6 +58,9 @@ namespace ItemRoulettePatcher
 
         private void Update()
         {
+            // Every frame: opening/closing a roulette window should pause/unpause immediately.
+            PauseWhileOpenPatch.Tick();
+
             // Cheap poll (4x/second) instead of juggling lobby/run/scene events: it also covers clients,
             // whose artifact state is replicated from the host at arbitrary times.
             if (Time.unscaledTime < _nextGateCheck)
@@ -71,6 +74,7 @@ namespace ItemRoulettePatcher
 
         private void OnDestroy()
         {
+            PauseWhileOpenPatch.Release();
             RouletteGate.Release();
             _harmony?.UnpatchSelf();
         }

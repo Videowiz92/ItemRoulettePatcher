@@ -35,6 +35,15 @@ Quality and Risk of Options. Look for these lines in `BepInEx/LogOutput.log` on 
 2. Default (`LifeBetRespectsExtraLives = false`): you die and Dio's is consumed without saving you (ItemRoulette's original behaviour).
 3. Set it to `true`: you die, Dio's triggers and you respawn. Repeat with Seed of Life as equipment.
 
+## Pause in single-player
+1. Single-player run with ItemRoulette's `PauseGameWhileOpen = true` (Risk of Options or its .cfg). Spin with `B`.
+2. While the reel is visible the game world freezes (enemies, projectiles, timers) but the reel still animates and shows the result.
+   When the reel closes, the game resumes at normal speed.
+3. The same while the casino (`N`) or the admin menu (`F7`) is open. Open the real pause menu (Esc) during a spin: it must pause and
+   resume normally and the game must not run behind the menu.
+4. `PauseGameWhileOpen = false` (ItemRoulette's option) or `PauseWhileOpen = false` (ours): never pauses. Multiplayer: never pauses.
+5. After quitting a run to the menu the game must not stay frozen.
+
 ## Language
 1. ItemRoulette `Language = Auto` with the game in English. Open Lunar Pods, Void Cradles, scavenger sacks, trigger chaos events, read the Sale Star description.
 2. No Russian text in toasts, journal (`J`) or descriptions.

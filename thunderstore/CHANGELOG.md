@@ -7,4 +7,5 @@
 - Fixed the Void-decision banner not closing after taking a Quality equipment.
 - Fixed the Substandard Duplicator not triggering for items won on the roulette or accepted from a Void decision.
 - Added optional `LifeBetRespectsExtraLives` (off by default).
+- ItemRoulette's `PauseGameWhileOpen` ("pause in singleplayer") option now works: it is never read by ItemRoulette 1.4.4. Config `PauseWhileOpen`.
 - Translate Russian-only messages to English when ItemRoulette's language is not Russian.

@@ -14,6 +14,7 @@ Instructions for the ItemRoulette author to apply every change directly in the o
 | Feature | **Artifact of the Roulette** gates all of ItemRoulette; toggle it on the lobby screen, no restart | `RequireArtifact` (true) |
 | Fix | Replaced **Quality equipment is dropped at its real tier**, not as the vanilla equipment. Also lets the Void-decision banner close for Quality equipment. | `PreserveQualityEquipment` (true) |
 | Fix | **Substandard Duplicator** gives its temporary copy for roulette wins and accepted Void items | `DuplicatorOnRouletteItems` (true) |
+| Fix | **"Pause in singleplayer" works** (ItemRoulette's `PauseGameWhileOpen` option is never read by the mod): single-player pauses while the reel, casino or admin menu is open | `PauseWhileOpen` (true) |
 | Option | **Life Bet respects extra lives** (Dio's, Larva, Seed of Life). Off = ItemRoulette's original hard kill | `LifeBetRespectsExtraLives` (**false**) |
 | Fix | **Russian-only text** shown while the language is English/Auto is translated | `TranslateRussianFallbackText` (true), `LogUntranslatedRussian` (true) |
 

@@ -21,6 +21,7 @@ No client restart needed. (Config `RequireArtifact = false` brings back the old 
 | Replacing a Quality equipment through the roulette dropped the plain vanilla equipment (Quality Executive Card Tier 4 became a vanilla Executive Card). | The old equipment is dropped at its real Quality tier. | `PreserveQualityEquipment` (on) |
 | With a Substandard Duplicator, items won on the roulette never got their temporary copy. | Roulette wins (and accepted Void items) trigger the Duplicator like a normal pickup. | `DuplicatorOnRouletteItems` (on) |
 | Losing a Life Bet ignores Dio's Best Friend, Pluripotent Larva and Seed of Life. | Optional: a lost bet becomes an ordinary lethal hit that extra lives can save you from. | `LifeBetRespectsExtraLives` (**off**, ItemRoulette's behaviour) |
+| ItemRoulette's "Pause game while open" (single-player) option does nothing - the mod never reads it. | Single-player is paused while the reel, casino or admin menu is open (needs ItemRoulette's own option on). Multiplayer is never paused. | `PauseWhileOpen` (on) |
 | Russian text appears even when the language is English / Auto (chest broadcasts, chaos-event descriptions, the Sale Star description, ...). | Those Russian-only messages are translated to English. | `TranslateRussianFallbackText` (on) |
 
 Config file: `BepInEx/config/com.itemroulettepatcher.fixes.cfg`. All options are also in Risk of Options.

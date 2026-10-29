@@ -17,6 +17,7 @@ namespace ItemRoulettePatcher
             Add(PluginConfig.PreserveQualityEquipment);
             Add(PluginConfig.DuplicatorOnRouletteItems);
             Add(PluginConfig.LifeBetRespectsExtraLives);
+            Add(PluginConfig.PauseWhileOpen);
             Add(PluginConfig.TranslateRussianFallbackText);
         }
 

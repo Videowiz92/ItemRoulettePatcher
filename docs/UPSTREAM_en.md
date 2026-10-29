@@ -162,7 +162,18 @@ text next to the Russian (config descriptions cannot change with the in-game lan
 
 ---
 
-## 5. (Optional) Switching the whole mod with an artifact
+## 5. "Pause in singleplayer" (`PauseGameWhileOpen`) does nothing
+
+**Symptom.** The option is created in `ModConfig` and listed in `RiskOfOptionsCompat`, but nothing reads it, so the single-player game never pauses.
+
+**Fix.** While a roulette window is open (`RouletteUI` state Spinning / Finished / VoidDecision, `CasinoRouletteUI.IsOpen`, `AdminMenuUI.IsOpen`) in
+single-player (`RoR2Application.isInSinglePlayer`) with the option on, set `Time.timeScale = 0`, and restore the previous value when the window closes
+(only when `PauseManager.isPaused` is false, so the real pause menu is never un-paused from behind). Your UI already animates on unscaled time, so the reel keeps
+moving. Also restore the time scale when the run ends. See `PauseWhileOpenPatch.cs`.
+
+---
+
+## 6. (Optional) Switching the whole mod with an artifact
 
 The patcher adds an *Artifact of the Roulette* and turns ItemRoulette on/off from it at runtime without a restart. It does this with
 two existing modules, so no new on/off machinery was needed in your code:
