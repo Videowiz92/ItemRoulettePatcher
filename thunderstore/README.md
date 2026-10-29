@@ -30,10 +30,10 @@ Everyone in the lobby needs this mod (it adds an artifact). The equipment, Dupli
 Translation runs on each player's own client.
 
 ## Icons / AI note
-The mod's icons (the in-game artifact icon and this page's icon) were made with AI as placeholders. You can use your own artifact icon without
-rebuilding: put `artifact_on.png` and `artifact_off.png` next to `ItemRoulettePatcher.dll` (square, e.g. 128x128 or 256x256). See the GitHub README for details.
+The mod's icons (the in-game artifact icon and this page's icon) were made with AI as placeholders. If the ItemRoulette author builds the artifact into
+ItemRoulette they can use their own art; the GitHub README explains where.
 
-*Иконки мода (артефакт в игре и иконка страницы) созданы с помощью ИИ и служат заглушками. Свои иконки артефакта можно добавить без пересборки: положите `artifact_on.png` и `artifact_off.png` рядом с `ItemRoulettePatcher.dll`.*
+*Иконки мода (артефакт в игре и иконка страницы) созданы с помощью ИИ и служат заглушками. Если автор ItemRoulette встроит артефакт в свой мод, он может использовать свои иконки; подробности в README на GitHub.*
 
 ## Reporting leftovers
 If Russian text still shows up while ItemRoulette is set to English, the game log gets a line starting with

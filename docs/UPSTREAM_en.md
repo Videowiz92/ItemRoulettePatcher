@@ -176,6 +176,8 @@ If you would like this natively, define an `ArtifactDef`, register it with `R2AP
 One caveat: `Cleanup()` of the *other* modules (`Network`, `ServerSpinService`, `CasinoServerService`, `ServerEvents`, `RunState`) is empty,
 so their message handlers stay registered. That is harmless while the UI and hooks are off, but it means they are not a full tear-down.
 
+For the artifact's icon use your own art: set `ArtifactDef.smallIconSelectedSprite` / `smallIconDeselectedSprite` (square, e.g. 128x128 or 256x256; the deselected one is usually a darker version). The icon in this repo is an AI-generated placeholder drawn in code (`ArtifactIcon.cs`) - please replace it.
+
 ---
 
 Thank you for the mod - I hope these notes are useful. If something here is wrong or you prefer a different approach, please say so in an

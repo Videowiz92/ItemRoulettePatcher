@@ -22,8 +22,6 @@ namespace ItemRoulettePatcher
 
         internal static ManualLogSource Log;
 
-        /// <summary>Folder containing the plugin DLL; optional custom artifact icons are read from here.</summary>
-        internal static string PluginDirectory { get; private set; }
 
         private Harmony _harmony;
         private float _nextGateCheck;
@@ -31,7 +29,6 @@ namespace ItemRoulettePatcher
         private void Awake()
         {
             Log = Logger;
-            PluginDirectory = System.IO.Path.GetDirectoryName(Info.Location);
 
             if (!ItemRouletteBridge.Init())
             {
