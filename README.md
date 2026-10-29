@@ -52,6 +52,10 @@ Requires the .NET SDK (8+) and a profile that already has BepInEx, R2API (Conten
 3. `powershell -File scripts/package.ps1` produces `dist/ItemRoulettePatcher-<version>.zip` for Thunderstore.
 4. `dotnet run --project tests/TranslatorTests` checks the translation table.
 
+## License
+
+[MIT](LICENSE). The ItemRoulette author is explicitly welcome to copy any of this code into ItemRoulette.
+
 ## Status
 
 - Builds against the current game and ItemRoulette 1.4.4; the translation table is covered by `tests/TranslatorTests`.
