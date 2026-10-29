@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <!-- "Risk of Rain 2_Data\Managed" inside your Steam install. -->
+    <RoR2ManagedDir>C:\Program Files (x86)\Steam\steamapps\common\Risk of Rain 2\Risk of Rain 2_Data\Managed</RoR2ManagedDir>
+
+    <!-- Root of an r2modman / Thunderstore Mod Manager profile that has BepInEx, R2API,
+         Risk of Options and ItemRoulette installed (the folder that contains "BepInEx"). -->
+    <ProfileDir>C:\Users\YOU\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Default</ProfileDir>
+
+    <!-- Optional. When set, the built DLL is copied here after every build. -->
+    <DeployDir>$(ProfileDir)\BepInEx\plugins\ItemRoulettePatcher</DeployDir>
+  </PropertyGroup>
+</Project>

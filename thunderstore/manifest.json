@@ -1,0 +1,11 @@
+{
+  "name": "ItemRoulettePatcher",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/Videowiz92/ItemRoulettePatcher",
+  "description": "Fixes and an on/off artifact for ItemRoulette: Quality equipment drops, Substandard Duplicator, optional Life Bet extra lives, leaked Russian text.",
+  "dependencies": [
+    "HorinisTeam-ItemRoulette-1.4.4",
+    "RiskofThunder-R2API_ContentManagement-1.1.0",
+    "RiskofThunder-R2API_Language-1.1.0"
+  ]
+}

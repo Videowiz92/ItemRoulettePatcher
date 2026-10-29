@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <AssemblyName>ItemRoulettePatcher</AssemblyName>
+    <RootNamespace>ItemRoulettePatcher</RootNamespace>
+    <Version>1.0.0</Version>
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <!-- Several game assemblies are built against .NET Framework facades. -->
+    <NoWarn>$(NoWarn);CS0436;NU1701</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BepInExCoreDir>$(ProfileDir)\BepInEx\core</BepInExCoreDir>
+    <PluginsDir>$(ProfileDir)\BepInEx\plugins</PluginsDir>
+  </PropertyGroup>
+
+  <!-- ItemRoulette itself is deliberately NOT referenced: every interaction goes through reflection
+       (see ItemRouletteBridge.cs), so a renamed member produces a logged warning for that one patch
+       instead of a TypeLoadException that takes the whole plugin down. -->
+  <ItemGroup>
+    <Reference Include="BepInEx"><HintPath>$(BepInExCoreDir)\BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(BepInExCoreDir)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+
+    <Reference Include="RoR2"><HintPath>$(RoR2ManagedDir)\RoR2.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="HGCSharpUtils"><HintPath>$(RoR2ManagedDir)\HGCSharpUtils.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.Addressables"><HintPath>$(RoR2ManagedDir)\Unity.Addressables.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.ResourceManager"><HintPath>$(RoR2ManagedDir)\Unity.ResourceManager.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(RoR2ManagedDir)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(RoR2ManagedDir)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="com.unity.multiplayer-hlapi.Runtime"><HintPath>$(RoR2ManagedDir)\com.unity.multiplayer-hlapi.Runtime.dll</HintPath><Private>false</Private></Reference>
+
+    <Reference Include="R2API.ContentManagement"><HintPath>$(PluginsDir)\RiskofThunder-R2API_ContentManagement\R2API.ContentManagement\R2API.ContentManagement.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="R2API.Language"><HintPath>$(PluginsDir)\RiskofThunder-R2API_Language\R2API.Language\R2API.Language.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="RiskOfOptions"><HintPath>$(PluginsDir)\Rune580-Risk_Of_Options\RiskOfOptions\RiskOfOptions.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <Target Name="DeployToProfile" AfterTargets="Build" Condition="'$(DeployDir)' != ''">
+    <MakeDir Directories="$(DeployDir)" />
+    <Copy SourceFiles="$(OutDir)ItemRoulettePatcher.dll;$(OutDir)ItemRoulettePatcher.pdb" DestinationFolder="$(DeployDir)" />
+  </Target>
+
+</Project>

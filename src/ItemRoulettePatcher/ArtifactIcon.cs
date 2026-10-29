@@ -1,0 +1,80 @@
+using UnityEngine;
+
+namespace ItemRoulettePatcher
+{
+    /// <summary>
+    /// Draws the artifact icon at runtime (a small roulette wheel) so the mod ships without image assets.
+    /// Replace it with real art by loading a Texture2D and returning Sprite.Create(...) from <see cref="Create"/>.
+    /// </summary>
+    internal static class ArtifactIcon
+    {
+        private const int Size = 128;
+        private const int Pockets = 12;
+
+        public static Sprite Create(bool selected)
+        {
+            var background = selected ? new Color(0.13f, 0.10f, 0.06f) : new Color(0.15f, 0.15f, 0.15f);
+            var rim = selected ? new Color(1f, 0.82f, 0.28f) : new Color(0.46f, 0.46f, 0.46f);
+            var red = selected ? new Color(0.78f, 0.12f, 0.12f) : new Color(0.30f, 0.30f, 0.30f);
+            var dark = selected ? new Color(0.07f, 0.07f, 0.07f) : new Color(0.10f, 0.10f, 0.10f);
+
+            var texture = new Texture2D(Size, Size, TextureFormat.RGBA32, false)
+            {
+                name = selected ? "ItemRoulettePatcherArtifactOn" : "ItemRoulettePatcherArtifactOff",
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear,
+                hideFlags = HideFlags.HideAndDontSave,
+            };
+
+            var pixels = new Color[Size * Size];
+            var half = Size / 2f;
+            for (var y = 0; y < Size; y++)
+            {
+                for (var x = 0; x < Size; x++)
+                {
+                    var dx = (x + 0.5f - half) / half;
+                    var dy = (y + 0.5f - half) / half;
+                    var radius = Mathf.Sqrt(dx * dx + dy * dy);
+
+                    Color color;
+                    if (radius < 0.15f)
+                    {
+                        color = dark;
+                    }
+                    else if (radius < 0.30f)
+                    {
+                        color = rim;
+                    }
+                    else if (radius < 0.40f)
+                    {
+                        color = dark;
+                    }
+                    else if (radius < 0.82f)
+                    {
+                        var angle = Mathf.Atan2(dy, dx) + Mathf.PI;
+                        var pocket = Mathf.FloorToInt(angle / (2f * Mathf.PI) * Pockets) % Pockets;
+                        color = pocket % 2 == 0 ? red : dark;
+                    }
+                    else if (radius < 0.97f)
+                    {
+                        color = rim;
+                    }
+                    else
+                    {
+                        color = background;
+                    }
+
+                    color.a = 1f;
+                    pixels[y * Size + x] = color;
+                }
+            }
+
+            texture.SetPixels(pixels);
+            texture.Apply(false, false);
+
+            var sprite = Sprite.Create(texture, new Rect(0f, 0f, Size, Size), new Vector2(0.5f, 0.5f), 100f);
+            sprite.hideFlags = HideFlags.HideAndDontSave;
+            return sprite;
+        }
+    }
+}

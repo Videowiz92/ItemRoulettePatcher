@@ -1,0 +1,59 @@
+# ItemRoulettePatcher
+
+A side-loaded patch mod for [ItemRoulette](https://thunderstore.io/package/HorinisTeam/ItemRoulette/) (Risk of Rain 2).
+It depends on ItemRoulette, runs next to it and patches it in memory with [Harmony](https://github.com/BepInEx/HarmonyX) -
+**no ItemRoulette file is modified** and ItemRoulette stays a separate, normally-updating mod. Written against ItemRoulette **1.4.4**.
+
+Instructions for the ItemRoulette author to apply every change directly in the original mod:
+**[English](docs/UPSTREAM_en.md)** · **[Русский](docs/UPSTREAM_ru.md)**
+
+## What it changes
+
+| | Change | Config (`com.itemroulettepatcher.fixes.cfg`) |
+|---|---|---|
+| Feature | **Artifact of the Roulette** gates all of ItemRoulette; toggle it on the lobby screen, no restart | `RequireArtifact` (true) |
+| Fix | Replaced **Quality equipment is dropped at its real tier**, not as the vanilla equipment. Also lets the Void-decision banner close for Quality equipment. | `PreserveQualityEquipment` (true) |
+| Fix | **Substandard Duplicator** gives its temporary copy for roulette wins and accepted Void items | `DuplicatorOnRouletteItems` (true) |
+| Option | **Life Bet respects extra lives** (Dio's, Larva, Seed of Life). Off = ItemRoulette's original hard kill | `LifeBetRespectsExtraLives` (**false**) |
+| Fix | **Russian-only text** shown while the language is English/Auto is translated | `TranslateRussianFallbackText` (true), `LogUntranslatedRussian` (true) |
+
+### Why the language issue happens
+`Language = Auto` is detected correctly. The leaks are Russian-only string literals that never go through ItemRoulette's `Localization`
+(chest-open broadcasts, chaos-event descriptions, the Sale Star description's "on boss kill / on teleporter charge" fragment, a few fallbacks).
+`RussianTextTranslator.cs` is a table of those exact literals; anything it does not know is logged as `Untranslated Russian text ...`.
+
+### How the artifact switches ItemRoulette
+ItemRoulette is built from modules. `DropSuppression` owns every gameplay hook and `RouletteUI` owns the HUD, casino and hotkeys, and both have
+a real `Initialize()`/`Cleanup()`. `RouletteGate` calls those through reflection as soon as the artifact choice is known. It reads the choice from the lobby's rule book (and the run's rule book once the run exists), because `RunArtifactManager` only appears after the run starts - too late for the first stage, which is populated immediately. It also re-checks 4x/second and switches off if there is neither a lobby nor a run for ~3 seconds. Other modules only hold network message handlers and are idle without the UI and hooks.
+
+## Layout
+
+```
+src/ItemRoulettePatcher/        the plugin
+  Plugin.cs, PluginConfig.cs    entry point and settings
+  ItemRouletteBridge.cs         all access to ItemRoulette is reflection by name (no compile-time reference)
+  RouletteArtifact.cs, ArtifactIcon.cs, RouletteGate.cs   the artifact and the on/off switch
+  Patches/                      QualityEquipment, Duplicator, LifeBet, RussianText(+Translator)
+tests/TranslatorTests/          runs the real translation table against the strings from ItemRoulette's source
+thunderstore/                   manifest, icon, store README, changelog
+docs/                           upstream instructions (EN/RU) and the in-game test checklist
+scripts/                        package.ps1 (build + zip), make_icon.py
+```
+
+Because ItemRoulette is only reached by name, an ItemRoulette update that renames something produces a logged warning and skips that one
+patch instead of crashing. Patches are applied independently.
+
+## Building
+
+Requires the .NET SDK (8+) and a profile that already has BepInEx, R2API (ContentManagement, Language), Risk of Options and ItemRoulette installed.
+
+1. Copy `Local.props.example` to `Local.props` and set `RoR2ManagedDir` (game's `Risk of Rain 2_Data/Managed`) and `ProfileDir`.
+2. `dotnet build src/ItemRoulettePatcher -c Release` - with `DeployDir` set, the DLL is copied into your profile.
+3. `powershell -File scripts/package.ps1` produces `dist/ItemRoulettePatcher-<version>.zip` for Thunderstore.
+4. `dotnet run --project tests/TranslatorTests` checks the translation table.
+
+## Status
+
+- Builds against the current game and ItemRoulette 1.4.4; the translation table is covered by `tests/TranslatorTests`.
+- The Harmony patches and the artifact gate change live game behaviour and need to be exercised in a real run - see
+  [docs/TESTING.md](docs/TESTING.md).
